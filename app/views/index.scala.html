@@ -1,0 +1,23 @@
+@(transactions: Seq[models.Transaction], balances: Seq[models.PurseBalance])
+
+@main("FinProcessor") {
+
+    <style>
+        td.amount { text-align: right; }
+    </style>
+
+    <h1>Existing data</h1>
+
+    <h3>Transactions:</h3>
+
+    <table class="table">
+        <thead>
+            @transactionRowHeader()
+        </thead>
+        <tbody>
+            @transactions.map { transaction =>
+                @transactionRow(transaction, transaction.srcPurseBalanceAfter, transaction.dstPurseBalanceAfter)
+            }
+        </tbody>
+    </table>
+}

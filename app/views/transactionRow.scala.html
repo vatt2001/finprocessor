@@ -1,0 +1,15 @@
+@(transaction: models.Transaction, srcPurseBalance: Option[models.PurseBalance], dstPurseBalance: Option[models.PurseBalance])
+
+@import utils.AmountHelper
+
+<tr>
+    <td>@transaction.id.getOrElse("")</td>
+    <td><span title="Ordering: @transaction.ordering">@transaction.dateAt</span></td>
+    <td>@transaction.transactionType.formattedName</td>
+    <td class="amount">@AmountHelper.formatAmount(transaction.amount) @transaction.currency</td>
+    <td>@transaction.srcPurse.name</td>
+    <td class="amount">@srcPurseBalance.map(b => AmountHelper.formatAmount(b.amount))</td>
+    <td>@transaction.dstPurse.map(_.name)</td>
+    <td class="amount">@dstPurseBalance.map(b => AmountHelper.formatAmount(b.amount))</td>
+    <td>@transaction.comment</td>
+</tr>
